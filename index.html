@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Rule-Based Chat App</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+          <style>
+               .chat-container {
+                    max-width: 600px;
+                    margin: 50px auto;
+                    background: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+               }
+               .chat-box {
+                    max-height: 300px;
+                    overflow-y: auto;
+                    margin-bottom: 15px;
+               }
+               .chat-message {
+                    margin: 5px 0;
+               }
+               .user-message {
+                    text-align: right;
+               }
+          </style>
+     </head>
+     <body>
+          <div class="chat-container">
+               <h4 class="text-center">Chatbot</h4>
+               <div id="chatBox" class="chat-box border p-3"></div>
+               <div id="buttonContainer" class="text-center"></div>
+          </div>
+
+          <script>
+               const chatBox = document.getElementById("chatBox");
+               const buttonContainer = document.getElementById("buttonContainer");
+
+               const questions = [
+                    {
+                         question: "Welcome to Russel's Films and Photography! How can I assist you today?",
+                         buttons: [
+                              { text: "About Us", response: "Welcome to Russel's Films and Photography 🎥📸! We specialize in capturing your most precious moments, whether it's a wedding, event, or personal photoshoot. With a passion for storytelling and a keen eye for detail, we provide high-quality films and stunning photos that bring your vision to life. Let us freeze time and create beautiful memories for you to cherish forever. 💍✨ Let us tell your story through the lens! 🎬🌟" },
+                              { text: "Our Services", response: formatServices() },
+                              { text: "Service Prices", response: formatServicePrices() },
+                              { text: "How to Book", response: formatHowToBook() },
+                         ],
+                    },
+                    {
+                         question: "Would you like to know more?",
+                         buttons: [
+                              { text: "Turnover Time", response: formatDeliveryTime() }, // Updated with formatted response
+                              { text: "Contact Us", response: "You can reach Russel's Films and Photography at [Your Contact Info]. Let's capture your story! 📱" },
+                              { text: "Back", response: "Thank you for visiting! We hope to work with you soon. Goodbye! 🌟" },
+                         ],
+                    },
+               ];
+
+               // Function to format the Delivery Time message
+               function formatDeliveryTime() {
+                    return `
+        <div style="line-height: 1.6; padding: 10px;">
+            <strong>When will I receive the photos and videos?</strong><br><br>
+            
+            We offer <strong>same-day edits</strong> for certain events, especially weddings or parties, where you may want a highlight video or a sneak peek of your photos on the same day. 🎉✨<br><br>
+
+            For full edits of photos and videos:<br>
+            - <strong>Photos:</strong> 2-3 weeks<br>
+            - <strong>Videos:</strong> 4 weeks<br><br>
+
+            This ensures that all content meets our high-quality standards. For those special moments, we’ll also provide a preview right after your event! 🎥📸<br><br>
+
+            Thank you for trusting Russel's Films and Photography to capture your memories! 🌟
+        </div>
+    `;
+               }
+
+               // Function to format the How to Book message
+               function formatHowToBook() {
+                    return `
+        <div style="line-height: 1.6; padding: 10px;">
+            <strong>How To Book:</strong><br>
+            To book a session with Russel's Films and Photography, simply follow these steps:<br><br>
+
+            <strong>1. Contact Us 📱</strong><br>
+            Reach out through our website, social media, or by phone to inquire about availability and services.<br><br>
+
+            <strong>2. Provide Details ✨</strong><br>
+            Let us know the type of session (wedding, event, portrait, etc.), the date, time, and location.<br><br>
+
+            <strong>3. Get a Quote 💬</strong><br>
+            We'll send you a personalized quote based on your needs.<br><br>
+
+            <strong>4. Confirm Your Booking 📅</strong><br>
+            Once you're happy with the quote, confirm your booking by paying a deposit.<br><br>
+
+            <strong>5. Get Ready for Your Shoot 🎥📸</strong><br>
+            We'll take care of the rest! On the day of your session, we’ll be there to capture every special moment.<br><br>
+
+            We can’t wait to work with you and create beautiful memories! 🌟
+        </div>
+    `;
+               }
+
+               // Function to format the services message
+               function formatServices() {
+                    return `
+        <div style="line-height: 1.6; padding: 10px;">
+            <strong>OFFER SERVICES:</strong><br>
+            At Russel's Films and Photography, we offer a wide range of services to suit all your needs:<br><br>
+            
+            <strong>1. Wedding Photography & Videography 💍🎥</strong><br>
+            Capture every magical moment on your special day with stunning photos and cinematic videos.<br><br>
+
+            <strong>2. Event Photography 🎉📸</strong><br>
+            From birthdays to corporate events, we’ll document all the important moments.<br><br>
+
+            <strong>3. Portrait & Family Photography 👨‍👩‍👧‍👦📷</strong><br>
+            Create lasting memories with personalized photoshoots for you and your loved ones.<br><br>
+
+            <strong>4. Engagement & Couple Photoshoots 💑📸</strong><br>
+            Celebrate your love with romantic and beautiful shots.<br><br>
+
+            <strong>5. Commercial Photography & Videography 🏢🎬</strong><br>
+            Enhance your brand with professional photos and videos for your business.<br><br>
+
+            <strong>6. Social Media Content Creation 📱✨</strong><br>
+            We help businesses and influencers create engaging visuals for their online presence.<br><br>
+
+            Let Russel's Films and Photography turn your moments into masterpieces! 🌟
+        </div>
+    `;
+               }
+
+               // Function to format the service prices message
+               function formatServicePrices() {
+                    return `
+        <div style="line-height: 1.6; padding: 10px;">
+            <strong>SERVICE PRICES:</strong><br>
+            Here are the updated service packages at Russel's Films and Photography:<br><br>
+
+            <strong>1. Wedding Photography & Videography 💍🎥</strong><br>
+            Photography Only: ₱15,000<br>
+            Videography Only: ₱18,000<br>
+            Photography & Videography Combo: ₱28,000<br><br>
+
+            <strong>2. Event Photography 🎉📸</strong><br>
+            Half-Day (Up to 4 hours): ₱8,500<br>
+            Full-Day (Up to 8 hours): ₱14,500<br><br>
+
+            <strong>3. Portrait & Family Photography 👨‍👩‍👧‍👦📷</strong><br>
+            Single Portrait: ₱4,500<br>
+            Family Session (Up to 5 people): ₱7,500<br>
+            Extended Family (6+ people): ₱10,500<br><br>
+
+            <strong>4. Engagement & Couple Photoshoots 💑📸</strong><br>
+            Standard Package (1 hour, 2 locations): ₱6,500<br>
+            Deluxe Package (2 hours, 3 locations): ₱9,500<br><br>
+
+            <strong>5. Commercial Photography & Videography 🏢🎬</strong><br>
+            Photography Only: ₱10,500<br>
+            Videography Only: ₱13,500<br>
+            Photography & Videography Combo: ₱19,500<br><br>
+
+            <strong>6. Social Media Content Creation 📱✨</strong><br>
+            10 Photos: ₱7,500<br>
+            5 Short Videos (Up to 30 seconds each): ₱10,500<br><br>
+
+            <em>Note:</em> Custom packages are available, and prices may vary depending on location and additional requests. Contact us for a personalized quote!<br><br>
+            Let Russel's Films and Photography capture your memories at an affordable price! 🌟
+        </div>
+    `;
+               }
+
+               let currentQuestionIndex = 0;
+
+               // Function to display messages
+               function displayMessage(message, sender) {
+                    const messageElement = document.createElement("div");
+                    messageElement.className = `chat-message ${sender === "user" ? "user-message" : ""}`;
+                    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+                    chatBox.appendChild(messageElement);
+                    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+               }
+
+               // Function to create buttons
+               function createButtons(buttons) {
+                    buttonContainer.innerHTML = ""; // Clear existing buttons
+                    buttons.forEach((button) => {
+                         const btn = document.createElement("button");
+                         btn.className = "btn btn-primary m-2";
+                         btn.textContent = button.text;
+                         btn.addEventListener("click", () => {
+                              displayMessage(button.text, "User");
+                              setTimeout(() => {
+                                   displayMessage(button.response, "Bot");
+                                   nextQuestion();
+                              }, 500);
+                         });
+                         buttonContainer.appendChild(btn);
+                    });
+               }
+
+               function nextQuestion() {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                         const nextQ = questions[currentQuestionIndex];
+                         setTimeout(() => {
+                              displayMessage(nextQ.question, "Bot");
+                              createButtons(nextQ.buttons);
+                         }, 1000);
+                    } else {
+                         // Reset to the first question
+                         currentQuestionIndex = 0;
+                         setTimeout(() => {
+                              displayMessage("Let's continue! How else can I assist you?", "Bot");
+                              const firstQ = questions[currentQuestionIndex];
+                              createButtons(firstQ.buttons);
+                         }, 1000);
+                    }
+               }
+
+               // Initial Bot Message
+               displayMessage(questions[0].question, "Bot");
+               createButtons(questions[0].buttons);
+          </script>
+     </body>
+</html>
